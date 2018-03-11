@@ -28,7 +28,7 @@ public class HttpSourceProvider {
     private static final int READ_TIME_OUT_MS = 15000;
     private static final int CONNECT_TIME_OUT_MS = 20000;
 
-    // UnEscape \uXXXX string to normal chars
+    // UnEscape \\uXXXX string to normal chars
     boolean mDoUnEscape = false;
 
     // TODO: Add encoding conversion
@@ -180,7 +180,7 @@ public class HttpSourceProvider {
 
                 // building response string
                 while ((currentString = bReader.readLine()) != null) {
-                    httpResponseStringBuilder.append(currentString);
+                    httpResponseStringBuilder.append(currentString).append("\n");
                 }
 
                 bReader.close();
