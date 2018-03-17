@@ -192,7 +192,7 @@ public class HttpSourceProvider {
         // building response string
 
         try {
-            System.out.println("Actual reading from input stream");
+            //System.out.println("Actual reading from input stream");
             while ((currentString = bReader.readLine()) != null) {
                 httpResponseStringBuilder.append(currentString).append("\n");
             }
