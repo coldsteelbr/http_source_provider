@@ -85,7 +85,7 @@ public class HttpSourceProvider {
     private URL makeUrl() {
         URL url = null;
         try {
-            System.out.print("Forming URL: ");
+            //System.out.print("Forming URL: ");
             switch (mHttpMethod) {
                 case GET:
                     String urlString = mBaseUrl + (mQueryParamString != null ? mUrlDelimiter + mQueryParamString : "");
@@ -107,7 +107,7 @@ public class HttpSourceProvider {
     private HttpURLConnection makeConnection(URL url, Proxy proxy) {
         HttpURLConnection connection;
         try {
-            System.out.println("Opening connection");
+            //System.out.println("Opening connection");
 
             if (proxy != null) {
                 connection = (HttpURLConnection) url.openConnection(proxy);
@@ -142,9 +142,9 @@ public class HttpSourceProvider {
     private int getResponseCode(HttpURLConnection connection) {
         int responseCode;
         try {
-            System.out.print("Getting Response code: ");
+            //System.out.print("Getting Response code: ");
             responseCode = connection.getResponseCode();
-            System.out.println(responseCode);
+            //System.out.println(responseCode);
             return responseCode;
         } catch (IOException e) {
             connection.disconnect();
@@ -155,13 +155,10 @@ public class HttpSourceProvider {
     private InputStream getInputStream(HttpURLConnection connection) {
         InputStream in;
         try {
-            System.out.println("IN: sending request");
+            //System.out.println("IN: sending request");
             in = connection.getInputStream();
             return in;
         } catch (IOException e) {
-            //e.printStackTrace();
-            // TODO: Can't read. Try again
-            //System.err.println("// TODO: Can't get input stream. Try again");
             connection.disconnect();
             throw new TryAgainHttpException("Can't get response code. Try again\n" + e.getMessage());
         }
@@ -172,7 +169,7 @@ public class HttpSourceProvider {
 
         // reading response body according to the encoding
         if ("gzip".equals(connection.getContentEncoding())) {
-            System.out.println("Getting GZIP Input Stream");
+            //System.out.println("Getting GZIP Input Stream");
             try {
                 bReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(in), mSourceEncoding));
             } catch (IOException e) {
@@ -181,7 +178,7 @@ public class HttpSourceProvider {
             }
         } else {
             try {
-                System.out.println("Getting Input Stream Reader");
+                //System.out.println("Getting Input Stream Reader");
                 bReader = new BufferedReader(new InputStreamReader(in, mSourceEncoding));
             } catch (UnsupportedEncodingException e) {
                 connection.disconnect();
