@@ -21,8 +21,16 @@ public class HttpSourceProvider {
     }
 
     // TIME OUT
-    private static final int READ_TIME_OUT_MS = 3000;
-    private static final int CONNECT_TIME_OUT_MS = 3000;
+    private int mReadTimeOutMs = 3000;
+    private int mConnectTimeOutMs = 3000;
+
+    public void setReadTimeOutMs(int readTimeOutMs) {
+        mReadTimeOutMs = readTimeOutMs;
+    }
+
+    public void setConnectTimeOutMs(int connectTimeOutMs) {
+        mConnectTimeOutMs = connectTimeOutMs;
+    }
 
     // UnEscape \\uXXXX string to normal chars
     boolean mDoUnEscape = false;
@@ -114,8 +122,8 @@ public class HttpSourceProvider {
             } else {
                 connection = (HttpURLConnection) url.openConnection();
             }
-            connection.setReadTimeout(READ_TIME_OUT_MS);
-            connection.setConnectTimeout(CONNECT_TIME_OUT_MS);
+            connection.setReadTimeout(mReadTimeOutMs);
+            connection.setConnectTimeout(mConnectTimeOutMs);
             addHeadersIfAny(connection);
             addCookiesIfAny(connection);
 
